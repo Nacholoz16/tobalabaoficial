@@ -7,6 +7,8 @@
   <title>Tobalaba</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=menu" />
+  <link rel="icon" href="assets/icon.jpg">
   <style>
     .bg-fixed-section {
       background-attachment: fixed;
@@ -23,7 +25,7 @@
 
 
 
-<body class="bg-[#0f0f0f] text-gray-100">
+<body class="bg-[#0f0f0f] text-gray-100" class="bg-[#0f0f0f] text-gray-100 transition-colors duration-300">
   <!-- Header -->
   <header id="site-header"
     class="w-full shadow-md bg-[#0f0f0f] sticky top-0 z-50 transition-colors duration-500 font-bold text-white">
@@ -32,9 +34,9 @@
 
       <!-- Botón hamburguesa -->
       <button id="menu-btn" class="md:hidden text-white focus:outline-none">
-        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
-          <path d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
+        <span class="material-symbols-outlined">
+          menu
+          </span>
       </button>
 
       <!-- Navegación -->
@@ -69,7 +71,7 @@
   </section>
 
   <!-- Cinta de transición superior -->
-  <div id="cinta" class="h-20 bg-[#1e3060]"></div>
+<div id="cinta" class="h-20 bg-[#1e3060]"></div>
   <!-- Fechas de eventos con fondo fijo -->
   <section id="fechas" class="h-screen bg-fixed-section flex flex-col justify-center text-white"
     style="background-image: url('assets/foto1.jpg');">
@@ -94,7 +96,7 @@
   <!-- Social Media y Videos -->
   <section id="videos" class="py-16 bg-[#1a1a1a] text-white">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-8">Redes Sociales</h2>
+      <h2 class="text-3xl font-bold mb-8">Escúchanos</h2>
       <div class="flex justify-center space-x-6 mb-12">
         <a href="https://open.spotify.com/intl-es/artist/3YGe3xQQiKXdq5BeCLWJoj?si=MG4hbUf4SIWKNNwtdo5Mdw"
           target="_blank" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Spotify</a>
@@ -145,33 +147,8 @@
   </footer>
 
   <script>
-    const header = document.getElementById('site-header');
-    const cinta = document.getElementById('cinta');
-    const cinta2 = document.getElementById('cinta2');
-
-    window.addEventListener('scroll', () => {
-      const cintaTop = cinta.getBoundingClientRect().top;
-      const cinta2Top = cinta2.getBoundingClientRect().top;
-
-      if (cintaTop <= 60 || cinta2Top <= 60) {
-        header.classList.add('bg-[#1e3060]', 'text-white');
-        header.classList.remove('bg-[#0f0f0f]', 'text-gray-100');
-      } else {
-        header.classList.remove('bg-[#1e3060]', 'text-white');
-        header.classList.add('bg-[#0f0f0f]', 'text-gray-100');
-      }
-    });
-
-    const btn = document.getElementById('menu-btn');
-    const menu = document.getElementById('mobile-menu');
-
-    btn.addEventListener('click', () => {
-      menu.classList.toggle('hidden');
-    });
   </script>
 </body>
 
 </html>
-<script>
-
-</script>
+<script src="js.js"></script>
