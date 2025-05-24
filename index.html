@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tobalaba</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
+  <style>
+    .bg-fixed-section {
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+      transition: background-image 0.5s ease-in-out;
+    }
+    .funky-font {
+    font-family: 'Concert One', cursive;
+  }
+  </style>
+</head>
+
+<body class="bg-[#0f0f0f] text-gray-100">
+  <!-- Header -->
+  <header id="site-header"
+    class="w-full shadow-md bg-[#0f0f0f] sticky top-0 z-50 transition-colors duration-500 font-bold text-white">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-3xl tracking-wide funky-font ">Tobalaba</h1>
+
+      <!-- Botón hamburguesa -->
+      <button id="menu-btn" class="md:hidden text-white focus:outline-none">
+        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <!-- Navegación -->
+      <nav id="menu" class="hidden md:flex md:items-center md:space-x-8 text-sm">
+        <a href="#inicio" class="hover:text-[#facc15] transition">Inicio</a>
+        <a href="#fechas" class="hover:text-[#34d399] transition">Fechas</a>
+        <a href="#videos" class="hover:text-[#60a5fa] transition">Escúchanos</a>
+        <a href="#contacto" class="hover:text-[#f472b6] transition">Contacto</a>
+      </nav>
+    </div>
+
+    <!-- Menú móvil -->
+    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2 text-sm">
+      <a href="#inicio" class="block hover:text-[#facc15]">Inicio</a>
+      <a href="#fechas" class="block hover:text-[#34d399]">Fechas</a>
+      <a href="#videos" class="block hover:text-[#60a5fa]">Escúchanos</a>
+      <a href="#contacto" class="block hover:text-[#f472b6]">Contacto</a>
+    </div>
+  </header>
+
+
+  <!-- Hero Section con fondo fijo -->
+  <section id="inicio" class="h-screen bg-fixed-section flex items-center justify-end text-white px-8"
+    style="background-image: url('assets/foto2.jpg');">
+    <div class="max-w-md text-right">
+      <p class="mb-6 text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros
+        elementum tristique. Duis cursus, mi quis viverra ornare.</p>
+      <a href="#fechas"
+        class="bg-[#1e3060] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#162447] transition">Ver
+        fechas</a>
+    </div>
+  </section>
+
+  <!-- Cinta de transición superior -->
+  <div id="cinta" class="h-20 bg-[#1e3060]"></div>
+
+  <!-- Fechas de eventos con fondo fijo -->
+  <section id="fechas" class="h-screen bg-fixed-section flex flex-col justify-center text-white"
+    style="background-image: url('assets/foto1.jpg');">
+    <div class="container mx-auto px-4 bg-black bg-opacity-50 p-6 rounded-xl">
+      <h2 class="text-3xl font-bold mb-8">Próximas fechas</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Repite este bloque por cada evento -->
+        <div class="bg-[#0f0f0f] bg-opacity-90 text-gray-100 rounded-xl shadow p-6">
+          <h3 class="text-xl font-semibold">Santiago</h3>
+          <p class="text-gray-400">Teatro Nescafé de las Artes</p>
+          <p class="text-gray-500">25 de Junio, 2025</p>
+          <a href="#" class="inline-block mt-4 bg-[#1e3060] text-white px-4 py-2 rounded hover:bg-[#162447]">Comprar
+            entradas</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cinta de transición inferior -->
+  <div id="cinta2" class="h-20 bg-[#2f58a0]"></div>
+
+  <!-- Social Media y Videos -->
+  <section id="videos" class="py-16 bg-[#1a1a1a] text-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-8">Redes Sociales</h2>
+      <div class="flex justify-center space-x-6 mb-12">
+        <a href="https://open.spotify.com/intl-es/artist/3YGe3xQQiKXdq5BeCLWJoj?si=MG4hbUf4SIWKNNwtdo5Mdw"
+          target="_blank" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Spotify</a>
+        <a href="https://www.youtube.com/channel/UCGJ-QUol1I0ep_DFWl6SRsw" target="_blank"
+          class="bg-[#1e3060] text-white px-4 py-2 rounded hover:bg-[#162447]">YouTube</a>
+        <a href="https://on.soundcloud.com/H87iLSbPMxQMwqtU6" target="_blank"
+          class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">SoundCloud</a>
+      </div>
+
+      <h3 class="text-2xl font-semibold mb-6">Videos</h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        <iframe class="w-full aspect-video rounded-lg" width="560" height="315"
+          src="https://www.youtube.com/embed/bO7H_FTD3do?si=X7A4lTArG-Ja1lFK&amp;start=1" title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe class="w-full aspect-video rounded-lg" width="560" height="315"
+          src="https://www.youtube.com/embed/qNnFVt4JGo8?si=CMXhOz-kcs43-yN1&amp;start=4" title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe class="w-full aspect-video rounded-lg" width="560" height="315"
+          src="https://www.youtube.com/embed/KOJdSQDudUE?si=FQeOnd3zxk3lB4Eh" title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto" class="py-16 bg-[#0f0f0f] text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">Contacto</h2>
+      <p class="mb-4">Puedes escribirme a <a href="mailto:contacto@misitio.cl"
+          class="text-[#1e3060] hover:underline">contacto@misitio.cl</a></p>
+      <div class="flex justify-center space-x-4">
+        <a href="#" class="text-gray-400 hover:text-[#1e3060]">Instagram</a>
+        <a href="#" class="text-gray-400 hover:text-[#1e3060]">YouTube</a>
+        <a href="#" class="text-gray-400 hover:text-[#1e3060]">TikTok</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-[#1a1a1a] py-6 text-center text-sm text-gray-500">
+    &copy; 2025 Nacholoz. Todos los derechos reservados.
+  </footer>
+
+  <script>
+    const header = document.getElementById('site-header');
+    const cinta = document.getElementById('cinta');
+    const cinta2 = document.getElementById('cinta2');
+
+    window.addEventListener('scroll', () => {
+      const cintaTop = cinta.getBoundingClientRect().top;
+      const cinta2Top = cinta2.getBoundingClientRect().top;
+
+      if (cintaTop <= 60 || cinta2Top <= 60) {
+        header.classList.add('bg-[#1e3060]', 'text-white');
+        header.classList.remove('bg-[#0f0f0f]', 'text-gray-100');
+      } else {
+        header.classList.remove('bg-[#1e3060]', 'text-white');
+        header.classList.add('bg-[#0f0f0f]', 'text-gray-100');
+      }
+    });
+
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('mobile-menu');
+
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+  </script>
+</body>
+
+</html>
+<script>
+
+</script>
