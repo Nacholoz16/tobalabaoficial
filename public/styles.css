@@ -7,6 +7,10 @@
 }
 
 /* Configuración Base */
+html {
+  scroll-behavior: smooth; /* <--- ESTO ARREGLA EL SCROLL HACIA ATRÁS */
+}
+
 body {
   background-color: var(--bg-deep);
   color: var(--text-white);

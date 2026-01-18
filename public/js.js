@@ -4,21 +4,65 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuBtn = document.getElementById('menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     const closeMenu = document.getElementById('close-menu');
-    const menuLinks = document.querySelectorAll('.menu-link');
-
-    function toggleMenu() {
-        mobileMenu.classList.toggle('hidden');
+    
+    // Función para mostrar/ocultar menú
+    function toggleMenu(forceClose = false) {
+        if (!mobileMenu) return;
+        if (forceClose) {
+            mobileMenu.classList.add('hidden');
+        } else {
+            mobileMenu.classList.toggle('hidden');
+        }
     }
 
-    if(menuBtn) menuBtn.addEventListener('click', toggleMenu);
-    if(closeMenu) closeMenu.addEventListener('click', toggleMenu);
+    if(menuBtn) menuBtn.addEventListener('click', () => toggleMenu());
+    if(closeMenu) closeMenu.addEventListener('click', () => toggleMenu());
+
+    // --- 2. NAVEGACIÓN "STICKY" CORREGIDA (CÁLCULO MATEMÁTICO) ---
+    // Seleccionamos todos los links del menú (escritorio y móvil)
+    const navLinks = document.querySelectorAll('nav a, .menu-link');
     
-    // Cerrar menú al hacer clic en un enlace
-    menuLinks.forEach(link => {
-        link.addEventListener('click', toggleMenu);
+    // Seleccionamos todas las secciones en orden
+    const sections = document.querySelectorAll('section');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const targetId = link.getAttribute('href');
+            
+            // Si es un link interno (empieza con #)
+            if (targetId && targetId.startsWith('#')) {
+                e.preventDefault(); // Evitamos el comportamiento estándar fallido
+                toggleMenu(true);   // Cerramos menú móvil si está abierto
+
+                // Buscamos a qué sección corresponde ese ID
+                let targetIndex = -1;
+                sections.forEach((section, index) => {
+                    if ('#' + section.id === targetId) {
+                        targetIndex = index;
+                    }
+                });
+
+                if (targetIndex !== -1) {
+                    // CÁLCULO MAGISTRAL:
+                    // Multiplicamos el índice por el alto de la ventana.
+                    // Ejemplo: Si vamos a la sección 2 (Bio), scrolleamos a 1 * AltoPantalla.
+                    const scrollPosition = targetIndex * window.innerHeight;
+
+                    window.scrollTo({
+                        top: scrollPosition,
+                        behavior: 'smooth'
+                    });
+                } else if (targetId === '#') {
+                    // Caso especial para botones que llevan arriba (como Spotify si tiene href="#")
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            }
+        });
     });
 
-    // --- 2. DATOS Y RENDERIZADO ---
+
+    // --- 3. DATOS Y RENDERIZADO (BACKEND) ---
+    // (Esta parte se mantiene igual que antes)
     const eventsGrid = document.getElementById('events-grid');
     window.isAdmin = false; 
 
@@ -49,8 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         events.forEach(evt => {
             const card = document.createElement('div');
-            
-            // ESTILO AVELLO: Plano, alto contraste, borde duro
             card.className = "bg-white text-[#1a1b31] p-6 flex flex-col md:flex-row justify-between items-center group hover:bg-[#1350c2] hover:text-white transition-colors duration-300 cursor-default";
             
             let deleteBtnHTML = '';
@@ -58,7 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 deleteBtnHTML = `<button onclick="deleteEvent(${evt.id})" class="text-xs bg-red-600 text-white px-2 py-1 uppercase font-bold ml-4 hover:bg-red-800">Borrar</button>`;
             }
 
-            // Layout horizontal tipo lista de fechas de gira
             card.innerHTML = `
                 <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-8 w-full text-center md:text-left">
                     <div class="font-black text-3xl md:text-4xl uppercase tracking-tighter w-full md:w-32 leading-none">
@@ -83,27 +124,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // --- 3. ADMIN ---
+    // --- 4. ADMIN ---
     const adminPanel = document.getElementById('admin-panel');
     const adminTrigger = document.getElementById('admin-trigger');
 
     if(adminTrigger) {
-        adminTrigger.addEventListener('click', () => {
+        adminTrigger.addEventListener('click', (e) => {
+            e.preventDefault(); // Evitamos que salte
             const password = prompt("ADMIN:");
             if (password === "tobalaba") { 
                 window.isAdmin = true;
-                toggleAdmin(true);
+                toggleAdminPanel(true);
                 loadEvents();
             }
         });
     }
 
-    window.toggleAdmin = function(show) {
+    window.toggleAdminPanel = function(show) { // Renombrado para evitar conflicto con toggleMenu
         if(adminPanel) {
             if(show === true) adminPanel.classList.remove('hidden');
             else adminPanel.classList.toggle('hidden');
         }
     }
+    // Exponer al window para el botón de cerrar del HTML
+    window.toggleAdmin = window.toggleAdminPanel; 
 
     window.addEvent = async function() {
         const date = document.getElementById('new-date').value;
