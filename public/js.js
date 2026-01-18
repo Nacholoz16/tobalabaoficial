@@ -46,6 +46,29 @@ async function init() {
         }, intervalTime);
     }
 
+        // --- Animación HOLA al entrar en pantalla ---
+    const contactSection = document.getElementById('contacto');
+    const contactTitle = document.getElementById('contactTitle');
+
+    if (contactSection && contactTitle) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Dispara la animación
+                    contactTitle.classList.add('animate');
+
+                    // Dejamos de observar para que ocurra solo una vez
+                    observer.disconnect();
+                }
+            });
+        }, {
+            threshold: 0.5 // Se activa cuando el 50% de la sección es visible
+        });
+
+        observer.observe(contactSection);
+    }
+
+
     // --- 2. GESTIÓN DE USUARIOS (NUEVO) ---
     function setupUsersManager() {
         const openBtn = document.getElementById('open-users-btn');
@@ -411,3 +434,204 @@ function renderEvents(events, container) {
         });
     }
 });
+
+
+const hint = document.getElementById("music-hint");
+const backdrop = document.getElementById("music-backdrop");
+const btnYes = document.getElementById("music-hint-yes");
+const btnNo = document.getElementById("music-hint-no");
+const orb = document.getElementById("music-orb");
+
+const decision = localStorage.getItem("musicHintDecision");
+
+// ----------------------
+// SoundCloud
+// ----------------------
+let scWidget = null;
+const iframe = document.getElementById("sc-player");
+
+// ----------------------
+// Config
+// ----------------------
+const START_AT = 6000;      // ms
+const PLAY_TIME = 10000;    // ms (usa 50000 si quieres)
+const FADE_TIME = 2000;     // ms
+const TARGET_VOLUME = 40;
+
+// ----------------------
+// State
+// ----------------------
+let started = false;
+let seeking = false;
+let segmentStartedAt = null;
+let fading = false;
+
+// ----------------------
+// Intro UI
+// ----------------------
+function showIntro() {
+  backdrop.classList.remove("opacity-0", "pointer-events-none");
+  backdrop.classList.add("opacity-100");
+
+  hint.classList.remove("opacity-0", "scale-95", "pointer-events-none");
+  hint.classList.add("opacity-100", "scale-100", "pointer-events-auto");
+
+  orb?.classList.add("pulse");
+}
+
+function hideIntro() {
+  backdrop.classList.add("opacity-0", "pointer-events-none");
+  backdrop.classList.remove("opacity-100");
+
+  hint.classList.add("opacity-0", "scale-95", "pointer-events-none");
+  hint.classList.remove("opacity-100", "scale-100", "pointer-events-auto");
+
+  orb?.classList.remove("pulse");
+}
+
+// Mostrar intro solo si no ha dicho "sí"
+if (decision !== "yes") {
+  setTimeout(showIntro, 600);
+}
+
+// ----------------------
+// Fade helpers
+// ----------------------
+function fadeTo(target, duration) {
+  if (!scWidget) return;
+
+  const steps = 30;
+  const intervalTime = duration / steps;
+
+  scWidget.getVolume((current) => {
+    let v = current;
+    const step = (target - current) / steps;
+
+    const interval = setInterval(() => {
+      v += step;
+
+      if ((step > 0 && v >= target) || (step < 0 && v <= target)) {
+        scWidget.setVolume(target);
+        clearInterval(interval);
+      } else {
+        scWidget.setVolume(v);
+      }
+    }, intervalTime);
+  });
+}
+
+// ----------------------
+// Core logic
+// ----------------------
+function prepareCurrentTrack() {
+  if (!scWidget) return;
+
+  seeking = false;
+  segmentStartedAt = null;
+
+  scWidget.setVolume(0);
+  scWidget.play();
+}
+
+function goNextTrack() {
+  if (fading || !scWidget) return;
+  fading = true;
+
+  // Fade out
+  fadeTo(0, FADE_TIME);
+
+  setTimeout(() => {
+    scWidget.next();
+
+    // Si llegó al final de la playlist, vuelve al primero
+    scWidget.getCurrentSoundIndex((index) => {
+      if (index === null) {
+        scWidget.skip(0);
+      }
+    });
+
+    setTimeout(() => {
+      fading = false;
+      prepareCurrentTrack();
+    }, 800);
+
+  }, FADE_TIME);
+}
+
+// ----------------------
+// Init SoundCloud
+// ----------------------
+if (iframe && window.SC) {
+  scWidget = SC.Widget(iframe);
+
+  scWidget.bind(SC.Widget.Events.READY, () => {
+    scWidget.setVolume(0);
+  });
+
+  // Cada vez que empieza a sonar algo
+  scWidget.bind(SC.Widget.Events.PLAY, () => {
+    seeking = false;
+    segmentStartedAt = null;
+  });
+
+  // Loop principal basado en posición real
+  scWidget.bind(SC.Widget.Events.PLAY_PROGRESS, (e) => {
+    if (!started) return;
+
+    const pos = e.currentPosition;
+
+    // Forzar salto al segundo 6
+    if (!seeking && pos < START_AT - 200) {
+      seeking = true;
+      scWidget.seekTo(START_AT);
+      return;
+    }
+
+    // Cuando ya estamos realmente en el segmento
+    if (segmentStartedAt === null && pos >= START_AT) {
+      segmentStartedAt = pos;
+      fadeTo(TARGET_VOLUME, FADE_TIME);
+      return;
+    }
+
+    // Cuando ya se reprodujo el tiempo deseado
+    if (
+      segmentStartedAt !== null &&
+      pos >= segmentStartedAt + PLAY_TIME
+    ) {
+      segmentStartedAt = null;
+      goNextTrack();
+    }
+  });
+
+  // Si SoundCloud llega al final real de la playlist
+  scWidget.bind(SC.Widget.Events.FINISH, () => {
+    scWidget.skip(0);
+    prepareCurrentTrack();
+  });
+}
+
+// ----------------------
+// Start system
+// ----------------------
+function startSmartPlaylist() {
+  if (!scWidget || started) return;
+  started = true;
+  prepareCurrentTrack();
+}
+
+// ----------------------
+// Botones
+// ----------------------
+btnYes?.addEventListener("click", () => {
+  localStorage.setItem("musicHintDecision", "yes");
+  hideIntro();
+  orb?.classList.add("force-open");
+
+  startSmartPlaylist();
+});
+
+btnNo?.addEventListener("click", () => {
+  hideIntro();
+});
+

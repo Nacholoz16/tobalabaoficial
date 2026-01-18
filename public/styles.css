@@ -82,3 +82,109 @@ body {
 
 /* Scrollbar invisible pero funcional (estilo minimalista) */
 ::-webkit-scrollbar { width: 0px; background: transparent; }
+
+
+
+/* Animacion titulo HOLA**/
+
+#contactTitle {
+  color: transparent; /* el relleno lo controla el background */
+
+}
+
+#contactTitle.animate {
+  background: linear-gradient(
+    90deg,
+    #1a1b31 0%,
+    #1a1b31 42%,
+    #ffffff 50%,
+    #1a1b31 58%,
+    #1a1b31 100%
+  );
+  background-size: 350% 100%;
+  background-position: 100% 50%;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  animation: electricMid 1.6s cubic-bezier(.25,.9,.35,1) forwards;
+}
+
+@keyframes electricMid {
+  from { background-position: 100% 50%; }
+  to   { background-position: 0% 50%; }
+}
+
+
+.orb-container {
+  position: relative;
+}
+
+/* --- La bola --- */
+.orb-button {
+  width: 56px;
+  height: 56px;
+  border-radius: 9999px;
+  background: #1a1b31;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,.3);
+  transition: transform .4s cubic-bezier(.25,.9,.35,1);
+}
+
+
+/* --- Bola Spotify --- */
+.group:hover .orb-button {
+  transform: scale(0.9);
+}
+
+/* --- Panel oculto --- */
+.orb-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(0);
+  opacity: 0;
+  pointer-events: none;
+
+  width: 320px;
+  padding-left: 72px;
+
+  transition:
+    opacity .3s ease,
+    transform .5s cubic-bezier(.25,.9,.35,1);
+}
+
+/* --- Al hacer hover --- */
+.group:hover .orb-panel {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+#music-orb.pulse .orb-button {
+  animation: orbPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes orbPulse {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+
+
+
+
+
+
+
+
+
+
+
