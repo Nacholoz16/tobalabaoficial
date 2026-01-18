@@ -49,6 +49,22 @@ body {
   background-repeat: no-repeat;
 }
 
+.bg-cover-img-botella {
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#bio {
+  background-position: 75% center;
+}
+
+@media (max-width: 768px) {
+  #bio {
+    background-position: 60% center;
+  }
+}
+
+
 /* Capas */
 .overlay-layer {
   position: absolute;

@@ -1,0 +1,26 @@
+{
+  "heroTitle": {
+    "text": "TOBALABA",
+    "color": "#ffffff"
+  },
+  "heroSubtitle": {
+    "text": "Indie Rock / Puente Alto",
+    "color": "#e0e6ed"
+  },
+  "bioTitle": {
+    "text": "LA BANDA",
+    "color": "#3a59b4"
+  },
+  "bioText": {
+    "text": "Desde Puente Alto (2024). Sonido crudo. Identidad periférica.",
+    "color": "#ffffff"
+  },
+  "fechasTitle": {
+    "text": "EN VIVO",
+    "color": "#ffffff"
+  },
+  "contactTitle": {
+    "text": "Hola.",
+    "color": "#1a1b31"
+  }
+}

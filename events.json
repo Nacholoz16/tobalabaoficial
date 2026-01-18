@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1768714939199,
+    "date": "28 Jun",
+    "venue": "Santiago",
+    "details": "Parque O'Higgins",
+    "link": "https://www.ticketek.cl/entradas/musica/rock/tobalaba-parque-ohiggins-28-junio-2025",
+    "gratuito": false
+  },
+  {
+    "id": 1768715988749,
+    "date": "2026-01-18",
+    "venue": "Talagante",
+    "details": "Plaza de Talagante",
+    "link": "",
+    "gratuito": true
+  },
+  {
+    "id": 1768716977274,
+    "date": "2026-02-17",
+    "venue": "Ñuñoa",
+    "details": "Plaza Ñuñoa",
+    "link": "",
+    "gratuito": true
+  }
+]

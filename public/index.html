@@ -15,11 +15,9 @@
   <header id="site-header" class="fixed top-0 w-full z-50 transition-all duration-500 bg-transparent mix-blend-difference text-white">
     <div class="container mx-auto px-6 py-6 flex justify-between items-center">
       <h1 class="text-2xl font-black tracking-tighter uppercase z-50">Tobalaba.cl</h1>
-
       <button id="menu-btn" class="md:hidden focus:outline-none z-50">
         <span class="material-symbols-outlined text-4xl">menu</span>
       </button>
-
       <nav id="menu" class="hidden md:flex md:items-center md:space-x-12 text-sm font-bold tracking-[0.2em] uppercase">
         <a href="#inicio" class="hover:underline decoration-2 underline-offset-4">Inicio</a>
         <a href="#bio" class="hover:underline decoration-2 underline-offset-4">Bio</a>
@@ -27,7 +25,6 @@
         <a href="#contacto" class="hover:underline decoration-2 underline-offset-4">Contacto</a>
       </nav>
     </div>
-    
     <div id="mobile-menu" class="fixed inset-0 bg-[#1350c2] z-40 hidden flex flex-col justify-center items-center space-y-8 text-4xl font-black uppercase tracking-tighter">
       <a href="#inicio" class="menu-link hover:text-[#1a1b31]">Inicio</a>
       <a href="#bio" class="menu-link hover:text-[#1a1b31]">Bio</a>
@@ -36,22 +33,39 @@
     </div>
   </header>
 
-  <section id="inicio" class="sticky-section z-10">
-    <div class="bg-cover-img absolute inset-0" style="background-image: url('assets/foto2.jpg');"></div>
-    <div class="overlay-layer"></div>
-    
-    <div class="content-z container mx-auto px-4 h-full flex flex-col justify-center items-center text-center">
-      <h2 class="tobalaba-font text-[13vw] leading-none text-white mix-blend-overlay opacity-90 select-none">TOBALABA</h2>
-      <!-- <p class="text-white text-lg md:text-2xl font-bold tracking-[0.5em] uppercase mt-4 bg-[#1350c2] px-4 py-1 inline-block">Indie Rock / Puente Alto</p> -->
-    </div>
-  </section>
+<section id="inicio" class="sticky-section z-10">
+    <div id="hero-carousel" class="absolute inset-0 w-full h-full">
+        
+        <div class="carousel-slide absolute inset-0 bg-cover-img transition-opacity duration-1000 ease-in-out opacity-100"
+             style="background-image: url('assets/carrusel_2.jpg');"></div>
+        
+        <div class="carousel-slide absolute inset-0 bg-cover-img transition-opacity duration-1000 ease-in-out opacity-0"
+             style="background-image: url('assets/carrusel_1.jpg');"></div>
 
-  <section id="bio" class="sticky-section z-20 bg-[#1a1b31] text-[#e0e6ed]">
-    <div class="content-z container mx-auto px-6 max-w-5xl flex flex-col justify-center h-full">
-      <h2 class="tobalaba-font text-[12vw] leading-none text-[#1350c2] mb-8 text-left">LA<br>BANDA</h2>
-      
+        <div class="carousel-slide absolute inset-0 bg-cover-img transition-opacity duration-1000 ease-in-out opacity-0"
+             style="background-image: url('assets/carrusel_3.jpg');"></div>
+    </div>
+
+    <div class="overlay-layer pointer-events-none"></div>
+
+<div class="content-z container mx-auto px-4 h-full flex flex-col justify-end items-center text-center relative group-edit pointer-events-auto">
+    <h2 id="heroTitle" class="tobalaba-font text-[13vw] leading-none text-white mix-blend-overlay opacity-90 select-none">
+        TOBALABA
+    </h2>
+</div>
+
+</section>
+
+
+<section id="bio" 
+  class="sticky-section z-20  text-[#e0e6ed]"
+  style="background-image: url('assets/la_banda.jpg'); background-position: 30% center;">
+
+
+    <div class="content-z container mx-auto px-6 max-w-5xl flex flex-col justify-center h-full relative">
+        <h2 id="bioTitle" data-key="bioTitle" class="tobalaba-font text-[12vw] leading-none text-[#1350c2] mb-8 text-left editable">LA<br>BANDA</h2>
       <div class="grid md:grid-cols-2 gap-12 text-left">
-        <p class="text-xl md:text-2xl font-medium leading-tight text-white">
+        <p id="bioText" data-key="bioText" class="text-xl md:text-2xl font-medium leading-tight text-white editable">
           Desde Puente Alto (2024). <span class="text-[#3a59b4]">Sonido crudo.</span> Identidad periférica.
         </p>
         <div class="text-lg text-gray-400 font-mono space-y-2 border-l-4 border-[#1350c2] pl-6">
@@ -66,47 +80,115 @@
 
   <section id="fechas" class="sticky-section z-30">
     <div class="bg-cover-img absolute inset-0" style="background-image: url('assets/foto1.jpg');"></div>
-    <div class="overlay-layer bg-[#1a1b31]/90"></div> <div class="content-z container mx-auto px-4 h-full flex flex-col justify-center overflow-hidden">
+    <div class="overlay-layer bg-[#1a1b31]/90"></div> 
+    
+    <div class="content-z container mx-auto px-4 h-full flex flex-col justify-center overflow-hidden">
       
       <div id="admin-panel" class="hidden fixed bottom-4 right-4 bg-white text-black p-4 z-50 shadow-2xl max-w-sm border-4 border-[#1350c2]">
-        <h3 class="font-black uppercase mb-2 bg-[#1350c2] text-white px-2 inline-block">Editor</h3>
-        <input type="text" id="new-date" placeholder="Fecha" class="block w-full border-b-2 border-black mb-2 p-1 outline-none font-mono text-sm">
+        <div class="flex justify-between items-center mb-2 bg-[#1350c2] px-2 py-1">
+            <h3 class="font-black uppercase text-white">Gestor</h3>
+            <button id="open-users-btn" class="text-[10px] bg-black text-white px-2 py-0.5 uppercase font-bold hover:bg-gray-800">Usuarios</button>
+        </div>
+        
+        <input type="date" id="new-date" placeholder="Fecha (ej: 28 Jun)" class="block w-full border-b-2 border-black mb-2 p-1 outline-none font-mono text-sm">
         <input type="text" id="new-venue" placeholder="Ciudad" class="block w-full border-b-2 border-black mb-2 p-1 outline-none font-mono text-sm">
         <input type="text" id="new-details" placeholder="Lugar" class="block w-full border-b-2 border-black mb-2 p-1 outline-none font-mono text-sm">
+        <input type="text" id="new-link" placeholder="Link de Tickets (URL)" class="block w-full border-b-2 border-black mb-2 p-1 outline-none font-mono text-sm">
+        <label class="flex items-center gap-2 text-sm mb-2">
+            <input type="checkbox" id="new-gratuito" class="w-4 h-4">
+            Evento Gratuito
+        </label>
         <div class="flex gap-2 mt-2">
-            <button onclick="addEvent()" class="bg-black text-white px-4 py-1 font-bold uppercase hover:bg-[#1350c2] w-full">Agregar</button>
-            <button onclick="toggleAdmin()" class="text-xs underline text-gray-500">Cerrar</button>
+            <button onclick="addEvent()" class="bg-black text-white px-4 py-1 font-bold uppercase hover:bg-[#1350c2] w-full">Agregar Fecha</button>
         </div>
       </div>
 
-      <h2 class="tobalaba-font text-[10vw] text-white text-center mb-10 leading-none">EN VIVO</h2>
-      
-      <div id="events-grid" class="w-full max-w-4xl mx-auto space-y-4 px-4 overflow-y-auto max-h-[60vh]">
-        </div>
+      <h2 id="fechasTitle" data-key="fechasTitle" class="tobalaba-font text-[10vw] text-white text-center mb-10 leading-none editable">EN VIVO</h2>
+      <div id="events-grid" class="w-full max-w-4xl mx-auto space-y-4 px-4 overflow-y-auto max-h-[60vh]"></div>
     </div>
   </section>
 
   <section id="contacto" class="sticky-section z-40 bg-[#1350c2] text-white">
     <div class="content-z text-center px-4">
-      <h2 class="tobalaba-font text-[15vw] leading-none mb-8 text-[#1a1b31]">HOLA.</h2>
-      
+        <h2 id="contactTitle" data-key="contactTitle" class="tobalaba-font text-[15vw] leading-none mb-8 text-[#1a1b31] editable">HOLA.</h2>
       <div class="flex flex-col md:flex-row justify-center gap-4 mb-12">
-        <a href="https://open.spotify.com/intl-es/artist/3YGe3xQQiKXdq5BeCLWJoj?si=1GYjc5JSSrqRG3FdScHk8A" target="_blank" rel="noopener noreferrer" class="bg-white text-[#1350c2] px-8 py-4 text-xl font-black uppercase tracking-widest hover:bg-[#1a1b31] hover:text-white transition-colors border-4 border-transparent hover:border-white">
-            Spotify
-        </a>
-        <a href="https://www.youtube.com/@tobalaba_cl" target="_blank" rel="noopener noreferrer" class="bg-[#1a1b31] text-white px-8 py-4 text-xl font-black uppercase tracking-widest hover:bg-white hover:text-[#1a1b31] transition-colors border-4 border-transparent hover:border-[#1a1b31]">
-              YouTube
-            </a>
+        <a href="#" class="bg-white text-[#1350c2] px-8 py-4 text-xl font-black uppercase tracking-widest border-4 border-transparent">Spotify</a>
+        <a href="#" class="bg-[#1a1b31] text-white px-8 py-4 text-xl font-black uppercase tracking-widest border-4 border-transparent">YouTube</a>
       </div>
-      
       <p class="font-mono text-sm opacity-75">tobalababanda@gmail.com</p>
       
-      <footer class="absolute bottom-4 w-full text-center text-xs opacity-50 uppercase tracking-widest">
+      <footer class="absolute bottom-4 w-full text-center text-xs opacity-50 uppercase tracking-widest flex justify-center items-center gap-2">
         © 2026 Tobalaba Oficial
-        <button id="admin-trigger" class="ml-2">lock</button>
+        <button id="login-trigger" class="hover:text-white transition-colors"><span class="material-symbols-outlined text-sm">lock</span></button>
+        <span id="user-display" class="hidden font-bold text-white bg-black px-2"></span>
+        <button id="logout-btn" class="hidden text-red-500 font-bold underline">Salir</button>
       </footer>
     </div>
   </section>
+
+  <div id="login-modal" class="fixed inset-0 z-[100] bg-black/90 hidden flex justify-center items-center">
+    <div class="bg-white p-8 max-w-sm w-full border-4 border-[#1350c2]">
+        <h2 class="font-black text-2xl uppercase mb-4 text-[#1a1b31]">Acceso Admin</h2>
+        <input type="text" id="login-user" placeholder="Usuario" class="w-full border-2 border-black p-2 mb-4 font-mono text-sm uppercase">
+        <input type="password" id="login-pass" placeholder="Contraseña" class="w-full border-2 border-black p-2 mb-4 font-mono text-sm">
+        <div class="flex gap-4">
+            <button id="do-login" class="bg-[#1350c2] text-white font-bold uppercase px-6 py-2 w-full hover:bg-[#1a1b31]">Entrar</button>
+            <button id="close-login" class="text-xs underline text-gray-500">Cancelar</button>
+        </div>
+        <p id="login-error" class="text-red-600 font-bold text-xs mt-2 text-center hidden">Error de credenciales</p>
+    </div>
+  </div>
+
+  <div id="edit-modal" class="fixed inset-0 z-[100] bg-black/80 hidden flex justify-center items-center">
+    <div class="bg-white p-6 w-full max-w-md border-4 border-yellow-400 shadow-2xl">
+        <h3 class="font-black uppercase text-xl mb-4 bg-yellow-400 inline-block px-2">Editar Sección</h3>
+        <textarea id="edit-text-input" class="w-full border-2 border-black p-2 font-mono text-sm mb-4 h-24"></textarea>
+        <div class="flex gap-2 mb-6">
+            <input type="color" id="edit-color-picker" class="h-10 w-10 border-2 border-black cursor-pointer">
+            <input type="text" id="edit-color-text" class="flex-grow border-2 border-black p-2 font-mono text-sm uppercase" placeholder="#FFFFFF">
+        </div>
+        <div class="flex justify-between items-center">
+            <button id="save-content-btn" class="bg-black text-white px-6 py-2 font-bold uppercase hover:bg-green-600">Guardar</button>
+            <button id="close-edit-modal" class="text-xs underline text-gray-500">Cancelar</button>
+        </div>
+    </div>
+  </div>
+
+  <div id="users-modal" class="fixed inset-0 z-[100] bg-black/95 hidden flex justify-center items-center">
+    <div class="bg-white p-6 w-full max-w-lg border-4 border-[#1350c2] relative">
+        <button id="close-users-modal" class="absolute top-2 right-2 font-bold text-xl">X</button>
+        <h3 class="font-black uppercase text-xl mb-4 bg-[#1350c2] text-white inline-block px-2">Gestión de Usuarios</h3>
+        
+        <div class="bg-gray-100 p-4 mb-4 border-2 border-gray-300">
+            <h4 class="font-bold text-xs uppercase mb-2">Crear Nuevo Usuario</h4>
+            <div class="grid grid-cols-3 gap-2 mb-2">
+                <input type="text" id="u-new-name" placeholder="Usuario" class="border border-black p-1 text-sm">
+                <input type="password" id="u-new-pass" placeholder="Password" class="border border-black p-1 text-sm">
+                <select id="u-new-role" class="border border-black p-1 text-sm">
+                    <option value="admin">Admin</option>
+                    <option value="editor">Editor</option>
+                    <option value="superadmin">Superadmin</option>
+                </select>
+            </div>
+            <button id="create-user-btn" class="bg-black text-white text-xs font-bold uppercase px-4 py-1 w-full hover:bg-green-600">Crear Usuario</button>
+            <p id="user-msg" class="text-xs font-bold mt-1 text-center"></p>
+        </div>
+
+        <div class="max-h-60 overflow-y-auto border-t-2 border-black pt-2">
+            <table class="w-full text-sm font-mono text-left">
+                <thead>
+                    <tr class="bg-gray-200 uppercase text-xs">
+                        <th class="p-2">Usuario</th>
+                        <th class="p-2">Rol</th>
+                        <th class="p-2 text-right">Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="users-table-body">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+  </div>
 
   <script src="js.js"></script>
 </body>
