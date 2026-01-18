@@ -1,0 +1,64 @@
+/* --- PALETA TOBALABA --- */
+:root {
+  --bg-deep: #1a1b31;       /* Fondo oscuro */
+  --blue-electric: #1350c2; /* Azul principal */
+  --blue-mid: #3a59b4;      /* Azul medio */
+  --text-white: #e0e6ed;
+}
+
+/* Configuración Base */
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-white);
+  overflow-x: hidden;
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+}
+
+/* --- TIPOGRAFÍA ESTILO AVELLO --- */
+/* Grande, condensada, pesada, sin espacio entre letras */
+.avello-font {
+  font-family: 'Arial Black', 'Helvetica Black', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.05em; /* Letras muy pegadas */
+}
+
+/* --- EFECTO STICKY (CORTINA) --- */
+.sticky-section {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  /* Flexbox para centrar contenido */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 -20px 40px rgba(0,0,0,0.7); /* Sombra dura arriba */
+}
+
+/* Fondos */
+.bg-cover-img {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Capas */
+.overlay-layer {
+  position: absolute;
+  inset: 0;
+  background: var(--bg-deep);
+  opacity: 0.6; /* Un poco más transparente para ver las fotos */
+  z-index: 1;
+}
+
+.content-z {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+}
+
+/* Scrollbar invisible pero funcional (estilo minimalista) */
+::-webkit-scrollbar { width: 0px; background: transparent; }

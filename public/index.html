@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tobalaba | Sitio Oficial</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <link rel="icon" href="assets/icon.jpg">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="antialiased">
+  
+  <header id="site-header" class="fixed top-0 w-full z-50 transition-all duration-500 bg-transparent mix-blend-difference text-white">
+    <div class="container mx-auto px-6 py-6 flex justify-between items-center">
+      <h1 class="text-2xl font-black tracking-tighter uppercase z-50">Tobalaba.cl</h1>
+
+      <button id="menu-btn" class="md:hidden focus:outline-none z-50">
+        <span class="material-symbols-outlined text-4xl">menu</span>
+      </button>
+
+      <nav id="menu" class="hidden md:flex md:items-center md:space-x-12 text-sm font-bold tracking-[0.2em] uppercase">
+        <a href="#inicio" class="hover:underline decoration-2 underline-offset-4">Inicio</a>
+        <a href="#bio" class="hover:underline decoration-2 underline-offset-4">Bio</a>
+        <a href="#fechas" class="hover:underline decoration-2 underline-offset-4">En Vivo</a>
+        <a href="#contacto" class="hover:underline decoration-2 underline-offset-4">Contacto</a>
+      </nav>
+    </div>
+    
+    <div id="mobile-menu" class="fixed inset-0 bg-[#1350c2] z-40 hidden flex flex-col justify-center items-center space-y-8 text-4xl font-black uppercase tracking-tighter">
+      <a href="#inicio" class="menu-link hover:text-[#1a1b31]">Inicio</a>
+      <a href="#bio" class="menu-link hover:text-[#1a1b31]">Bio</a>
+      <a href="#fechas" class="menu-link hover:text-[#1a1b31]">Fechas</a>
+      <button id="close-menu" class="absolute top-6 right-6 text-2xl">CERRAR</button>
+    </div>
+  </header>
+
+  <section id="inicio" class="sticky-section z-10">
+    <div class="bg-cover-img absolute inset-0" style="background-image: url('assets/foto2.jpg');"></div>
+    <div class="overlay-layer"></div>
+    
+    <div class="content-z container mx-auto px-4 h-full flex flex-col justify-center items-center text-center">
+      <h2 class="avello-font text-[18vw] leading-none text-white mix-blend-overlay opacity-90 select-none">TOBA<br>LABA</h2>
+      <!-- <p class="text-white text-lg md:text-2xl font-bold tracking-[0.5em] uppercase mt-4 bg-[#1350c2] px-4 py-1 inline-block">Indie Rock / Puente Alto</p> -->
+    </div>
+  </section>
+
+  <section id="bio" class="sticky-section z-20 bg-[#1a1b31] text-[#e0e6ed]">
+    <div class="content-z container mx-auto px-6 max-w-5xl flex flex-col justify-center h-full">
+      <h2 class="avello-font text-[12vw] leading-none text-[#1350c2] mb-8 text-left">LA<br>BANDA</h2>
+      
+      <div class="grid md:grid-cols-2 gap-12 text-left">
+        <p class="text-xl md:text-2xl font-medium leading-tight text-white">
+          Desde Puente Alto (2024). <span class="text-[#3a59b4]">Sonido crudo.</span> Identidad periférica.
+        </p>
+        <div class="text-lg text-gray-400 font-mono space-y-2 border-l-4 border-[#1350c2] pl-6">
+          <p>VOCAL/GUITARRA: <span class="text-white">Tomás Álvarez</span></p>
+          <p>GUITARRA: <span class="text-white">Mauricio González</span></p>
+          <p>BATERÍA: <span class="text-white">Martín Ojeda</span></p>
+          <p>BAJO: <span class="text-white">Joan Urzúa</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="fechas" class="sticky-section z-30">
+    <div class="bg-cover-img absolute inset-0" style="background-image: url('assets/foto1.jpg');"></div>
+    <div class="overlay-layer bg-[#1a1b31]/90"></div> <div class="content-z container mx-auto px-4 h-full flex flex-col justify-center overflow-hidden">
+      
+      <div id="admin-panel" class="hidden fixed bottom-4 right-4 bg-white text-black p-4 z-50 shadow-2xl max-w-sm border-4 border-[#1350c2]">
+        <h3 class="font-black uppercase mb-2 bg-[#1350c2] text-white px-2 inline-block">Editor</h3>
+        <input type="text" id="new-date" placeholder="Fecha" class="block w-full border-b-2 border-black mb-2 p-1 outline-none font-mono text-sm">
+        <input type="text" id="new-venue" placeholder="Ciudad" class="block w-full border-b-2 border-black mb-2 p-1 outline-none font-mono text-sm">
+        <input type="text" id="new-details" placeholder="Lugar" class="block w-full border-b-2 border-black mb-2 p-1 outline-none font-mono text-sm">
+        <div class="flex gap-2 mt-2">
+            <button onclick="addEvent()" class="bg-black text-white px-4 py-1 font-bold uppercase hover:bg-[#1350c2] w-full">Agregar</button>
+            <button onclick="toggleAdmin()" class="text-xs underline text-gray-500">Cerrar</button>
+        </div>
+      </div>
+
+      <h2 class="avello-font text-[10vw] text-white text-center mb-10 leading-none">EN VIVO</h2>
+      
+      <div id="events-grid" class="w-full max-w-4xl mx-auto space-y-4 px-4 overflow-y-auto max-h-[60vh]">
+        </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="sticky-section z-40 bg-[#1350c2] text-white">
+    <div class="content-z text-center px-4">
+      <h2 class="avello-font text-[15vw] leading-none mb-8 text-[#1a1b31]">HOLA.</h2>
+      
+      <div class="flex flex-col md:flex-row justify-center gap-4 mb-12">
+        <a href="#" class="bg-white text-[#1350c2] px-8 py-4 text-xl font-black uppercase tracking-widest hover:bg-[#1a1b31] hover:text-white transition-colors border-4 border-transparent hover:border-white">
+            Spotify
+        </a>
+        <a href="#" class="bg-[#1a1b31] text-white px-8 py-4 text-xl font-black uppercase tracking-widest hover:bg-white hover:text-[#1a1b31] transition-colors border-4 border-transparent hover:border-[#1a1b31]">
+            YouTube
+        </a>
+      </div>
+
+      <p class="font-mono text-sm opacity-75">CONTACTO@TOBALABA.CL</p>
+      
+      <footer class="absolute bottom-4 w-full text-center text-xs opacity-50 uppercase tracking-widest">
+        © 2026 Tobalaba Oficial
+        <button id="admin-trigger" class="ml-2">lock</button>
+      </footer>
+    </div>
+  </section>
+
+  <script src="js.js"></script>
+</body>
+</html>
